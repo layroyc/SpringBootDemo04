@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册的vue</title>
+    <script type="text/javascript" src="https://unpkg.com/vue"></script>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <!--<link rel="stylesheet" href="/element-ui-2.13.2.css">-->
+    <script src="/vue.js"></script>
+    <!-- <script src="/element-ui-2.13.2.js"></script>-->
+    <script src="/axios.min.js"></script>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+</head>
+<body>
+<div id="app">
+    <el-form>
+        <el-form-item label="用户名" prop="adminName">
+            <el-input v-model="admin.adminName"  placeholder="请输入用户名" style="width: 15%"></el-input>
+        </el-form-item>
+        <el-form-item label="密码" prop="adminPwd">
+            <el-input type="password" v-model="admin.adminPwd"  placeholder="请输入密码" autocomplete="off" style="width: 15%"></el-input>
+        </el-form-item>
+        <el-form-item label="手机号" prop="adminPhone">
+            <el-input v-model="admin.adminPhone"  placeholder="请输入手机号" style="width: 15%"></el-input>
+        </el-form-item>
+        <el-form-item label="账户名" prop="adminAccount">
+            <el-input v-model="admin.adminAccount"  placeholder="请输入账户名" style="width: 15%"></el-input>
+        </el-form-item>
+        <el-form-item label="加密" prop="salt">
+            <el-input v-model="admin.salt"  placeholder="请输入加密" style="width: 15%"></el-input>
+        </el-form-item>
+
+        <el-form-item size="large">
+            <el-button type="primary" @click="reginstSub">立即注册</el-button>
+        </el-form-item>
+
+    </el-form>
+</div>
+<script>
+    var vm =new Vue({
+        el:'#app',
+        data:{
+            admin:{
+                adminName:'',
+                adminPwd:'',
+                adminPhone:'',
+                adminAccount:'',
+                salt:''
+            }
+        },
+        methods:{
+            reginstSub:function () {
+                console.log("asdfgh")
+               /* //调用axios 发送到后台
+                axios.post("/api/admin/loginByShiro",{
+                    adminAccount:this.account,
+                    adminPwd:this.pwd
+                }).then(res=>{
+                    console.log(res)
+                });*/
+            }
+        }
+    });
+</script>
+</body>
+</html>

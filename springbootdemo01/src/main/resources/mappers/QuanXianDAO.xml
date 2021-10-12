@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wy.dao.QuanXianDAO">
+  <resultMap id="BaseResultMap" type="com.wy.bean.QuanXian">
+    <id column="quan_xian_id" jdbcType="INTEGER" property="quanXianId" />
+    <result column="quan_xian_code" jdbcType="VARCHAR" property="quanXianCode" />
+    <result column="quan_xian_name" jdbcType="VARCHAR" property="quanXianName" />
+    <result column="quan_xian_perms" jdbcType="VARCHAR" property="quanXianPerms" />
+    <result column="quan_xian_url" jdbcType="VARCHAR" property="quanXianUrl" />
+    <result column="quan_xian_method" jdbcType="VARCHAR" property="quanXianMethod" />
+    <result column="quan_xian_pid" jdbcType="INTEGER" property="quanXianPid" />
+    <result column="quan_xian_order" jdbcType="INTEGER" property="quanXianOrder" />
+    <result column="quan_xian_type" jdbcType="INTEGER" property="quanXianType" />
+    <result column="quan_xian_status" jdbcType="INTEGER" property="quanXianStatus" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    quan_xian_id, quan_xian_code, quan_xian_name, quan_xian_perms, quan_xian_url, quan_xian_method, 
+    quan_xian_pid, quan_xian_order, quan_xian_type, quan_xian_status
+  </sql>
+  <select id="selectByExample" parameterType="com.wy.bean.QuanXianExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from quan_xian
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from quan_xian
+    where quan_xian_id = #{quanXianId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from quan_xian
+    where quan_xian_id = #{quanXianId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wy.bean.QuanXianExample">
+    delete from quan_xian
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wy.bean.QuanXian">
+    insert into quan_xian (quan_xian_id, quan_xian_code, quan_xian_name, 
+      quan_xian_perms, quan_xian_url, quan_xian_method, 
+      quan_xian_pid, quan_xian_order, quan_xian_type, 
+      quan_xian_status)
+    values (#{quanXianId,jdbcType=INTEGER}, #{quanXianCode,jdbcType=VARCHAR}, #{quanXianName,jdbcType=VARCHAR}, 
+      #{quanXianPerms,jdbcType=VARCHAR}, #{quanXianUrl,jdbcType=VARCHAR}, #{quanXianMethod,jdbcType=VARCHAR}, 
+      #{quanXianPid,jdbcType=INTEGER}, #{quanXianOrder,jdbcType=INTEGER}, #{quanXianType,jdbcType=INTEGER}, 
+      #{quanXianStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wy.bean.QuanXian">
+    insert into quan_xian
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="quanXianId != null">
+        quan_xian_id,
+      </if>
+      <if test="quanXianCode != null">
+        quan_xian_code,
+      </if>
+      <if test="quanXianName != null">
+        quan_xian_name,
+      </if>
+      <if test="quanXianPerms != null">
+        quan_xian_perms,
+      </if>
+      <if test="quanXianUrl != null">
+        quan_xian_url,
+      </if>
+      <if test="quanXianMethod != null">
+        quan_xian_method,
+      </if>
+      <if test="quanXianPid != null">
+        quan_xian_pid,
+      </if>
+      <if test="quanXianOrder != null">
+        quan_xian_order,
+      </if>
+      <if test="quanXianType != null">
+        quan_xian_type,
+      </if>
+      <if test="quanXianStatus != null">
+        quan_xian_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="quanXianId != null">
+        #{quanXianId,jdbcType=INTEGER},
+      </if>
+      <if test="quanXianCode != null">
+        #{quanXianCode,jdbcType=VARCHAR},
+      </if>
+      <if test="quanXianName != null">
+        #{quanXianName,jdbcType=VARCHAR},
+      </if>
+      <if test="quanXianPerms != null">
+        #{quanXianPerms,jdbcType=VARCHAR},
+      </if>
+      <if test="quanXianUrl != null">
+        #{quanXianUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="quanXianMethod != null">
+        #{quanXianMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="quanXianPid != null">
+        #{quanXianPid,jdbcType=INTEGER},
+      </if>
+      <if test="quanXianOrder != null">
+        #{quanXianOrder,jdbcType=INTEGER},
+      </if>
+      <if test="quanXianType != null">
+        #{quanXianType,jdbcType=INTEGER},
+      </if>
+      <if test="quanXianStatus != null">
+        #{quanXianStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wy.bean.QuanXianExample" resultType="java.lang.Long">
+    select count(*) from quan_xian
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update quan_xian
+    <set>
+      <if test="record.quanXianId != null">
+        quan_xian_id = #{record.quanXianId,jdbcType=INTEGER},
+      </if>
+      <if test="record.quanXianCode != null">
+        quan_xian_code = #{record.quanXianCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.quanXianName != null">
+        quan_xian_name = #{record.quanXianName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.quanXianPerms != null">
+        quan_xian_perms = #{record.quanXianPerms,jdbcType=VARCHAR},
+      </if>
+      <if test="record.quanXianUrl != null">
+        quan_xian_url = #{record.quanXianUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.quanXianMethod != null">
+        quan_xian_method = #{record.quanXianMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.quanXianPid != null">
+        quan_xian_pid = #{record.quanXianPid,jdbcType=INTEGER},
+      </if>
+      <if test="record.quanXianOrder != null">
+        quan_xian_order = #{record.quanXianOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.quanXianType != null">
+        quan_xian_type = #{record.quanXianType,jdbcType=INTEGER},
+      </if>
+      <if test="record.quanXianStatus != null">
+        quan_xian_status = #{record.quanXianStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update quan_xian
+    set quan_xian_id = #{record.quanXianId,jdbcType=INTEGER},
+      quan_xian_code = #{record.quanXianCode,jdbcType=VARCHAR},
+      quan_xian_name = #{record.quanXianName,jdbcType=VARCHAR},
+      quan_xian_perms = #{record.quanXianPerms,jdbcType=VARCHAR},
+      quan_xian_url = #{record.quanXianUrl,jdbcType=VARCHAR},
+      quan_xian_method = #{record.quanXianMethod,jdbcType=VARCHAR},
+      quan_xian_pid = #{record.quanXianPid,jdbcType=INTEGER},
+      quan_xian_order = #{record.quanXianOrder,jdbcType=INTEGER},
+      quan_xian_type = #{record.quanXianType,jdbcType=INTEGER},
+      quan_xian_status = #{record.quanXianStatus,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wy.bean.QuanXian">
+    update quan_xian
+    <set>
+      <if test="quanXianCode != null">
+        quan_xian_code = #{quanXianCode,jdbcType=VARCHAR},
+      </if>
+      <if test="quanXianName != null">
+        quan_xian_name = #{quanXianName,jdbcType=VARCHAR},
+      </if>
+      <if test="quanXianPerms != null">
+        quan_xian_perms = #{quanXianPerms,jdbcType=VARCHAR},
+      </if>
+      <if test="quanXianUrl != null">
+        quan_xian_url = #{quanXianUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="quanXianMethod != null">
+        quan_xian_method = #{quanXianMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="quanXianPid != null">
+        quan_xian_pid = #{quanXianPid,jdbcType=INTEGER},
+      </if>
+      <if test="quanXianOrder != null">
+        quan_xian_order = #{quanXianOrder,jdbcType=INTEGER},
+      </if>
+      <if test="quanXianType != null">
+        quan_xian_type = #{quanXianType,jdbcType=INTEGER},
+      </if>
+      <if test="quanXianStatus != null">
+        quan_xian_status = #{quanXianStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where quan_xian_id = #{quanXianId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wy.bean.QuanXian">
+    update quan_xian
+    set quan_xian_code = #{quanXianCode,jdbcType=VARCHAR},
+      quan_xian_name = #{quanXianName,jdbcType=VARCHAR},
+      quan_xian_perms = #{quanXianPerms,jdbcType=VARCHAR},
+      quan_xian_url = #{quanXianUrl,jdbcType=VARCHAR},
+      quan_xian_method = #{quanXianMethod,jdbcType=VARCHAR},
+      quan_xian_pid = #{quanXianPid,jdbcType=INTEGER},
+      quan_xian_order = #{quanXianOrder,jdbcType=INTEGER},
+      quan_xian_type = #{quanXianType,jdbcType=INTEGER},
+      quan_xian_status = #{quanXianStatus,jdbcType=INTEGER}
+    where quan_xian_id = #{quanXianId,jdbcType=INTEGER}
+  </update>
+</mapper>

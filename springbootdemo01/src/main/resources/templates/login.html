@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <!--<link rel="stylesheet" href="/element-ui-2.13.2.css">-->
+    <script src="/vue.js"></script>
+    <!-- <script src="/element-ui-2.13.2.js"></script>-->
+    <script src="/axios.min.js"></script>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+</head>
+<body>
+    <div id="app">
+        <el-form>
+            <el-form-item label="账户名" prop="adminName">
+                <el-input v-model="admin.adminName"  placeholder="请输入账户名" style="width: 15%"></el-input>
+            </el-form-item>
+            <el-form-item label="密码" prop="adminPwd">
+                <el-input type="password" v-model="admin.adminPwd"  placeholder="请输入密码" autocomplete="off" style="width: 15%"></el-input>
+            </el-form-item>
+
+
+            <el-form-item size="large">
+                <el-button type="primary" @click="loginSubmit">登录</el-button>
+                <el-button type="primary" @click="reginSubmit">注册</el-button>
+            </el-form-item>
+
+        </el-form>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                admin: {
+                    adminName: '',
+                    adminPwd: ''
+                }
+            },
+            methods:{
+                loginSubmit:function () {
+                    //页面一加载，就访问url  /student/selectAll
+                    axios.get("/api/admin/login",{
+                        params:{
+                            //获取后台的数据
+                            adminName:this.admin.adminName,
+                            adminPwd:this.admin.adminPwd
+                        }
+                    }).then(res=>{
+                        console.log(res)
+                        if(res.data.code==200){
+                            window.location.href="/page/studentList";
+                        }
+
+                    });
+                },
+                reginSubmit:function () {
+                    window.location.href="/page/register";
+                }
+
+            }
+        });
+    </script>
+</body>
+</html>

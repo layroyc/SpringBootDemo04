@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wy.dao.JiaoSeDAO">
+  <resultMap id="BaseResultMap" type="com.wy.bean.JiaoSe">
+    <id column="jiao_se_id" jdbcType="INTEGER" property="jiaoSeId" />
+    <result column="jiao_se_name" jdbcType="VARCHAR" property="jiaoSeName" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    jiao_se_id, jiao_se_name
+  </sql>
+  <select id="selectByExample" parameterType="com.wy.bean.JiaoSeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from jiao_se
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from jiao_se
+    where jiao_se_id = #{jiaoSeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from jiao_se
+    where jiao_se_id = #{jiaoSeId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wy.bean.JiaoSeExample">
+    delete from jiao_se
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wy.bean.JiaoSe">
+    insert into jiao_se (jiao_se_id, jiao_se_name)
+    values (#{jiaoSeId,jdbcType=INTEGER}, #{jiaoSeName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wy.bean.JiaoSe">
+    insert into jiao_se
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="jiaoSeId != null">
+        jiao_se_id,
+      </if>
+      <if test="jiaoSeName != null">
+        jiao_se_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="jiaoSeId != null">
+        #{jiaoSeId,jdbcType=INTEGER},
+      </if>
+      <if test="jiaoSeName != null">
+        #{jiaoSeName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wy.bean.JiaoSeExample" resultType="java.lang.Long">
+    select count(*) from jiao_se
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update jiao_se
+    <set>
+      <if test="record.jiaoSeId != null">
+        jiao_se_id = #{record.jiaoSeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.jiaoSeName != null">
+        jiao_se_name = #{record.jiaoSeName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update jiao_se
+    set jiao_se_id = #{record.jiaoSeId,jdbcType=INTEGER},
+      jiao_se_name = #{record.jiaoSeName,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wy.bean.JiaoSe">
+    update jiao_se
+    <set>
+      <if test="jiaoSeName != null">
+        jiao_se_name = #{jiaoSeName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where jiao_se_id = #{jiaoSeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wy.bean.JiaoSe">
+    update jiao_se
+    set jiao_se_name = #{jiaoSeName,jdbcType=VARCHAR}
+    where jiao_se_id = #{jiaoSeId,jdbcType=INTEGER}
+  </update>
+</mapper>
